@@ -34,7 +34,8 @@ class DeviceHelper {
 
   static Future<String> getFCM() async {
     final fcm = FirebaseMessaging.instance;
-    String? token = await fcm.getToken();
+    String? token =
+        Platform.isIOS ? await fcm.getAPNSToken() : await fcm.getToken();
     return token ?? 'fcmtoken';
   }
 }
