@@ -1,0 +1,2 @@
+D:/Office/product_sharing/android/app/.cxx/Debug/2f4q2429/x86/CMakeFiles/edit_cache.dir
+D:/Office/product_sharing/android/app/.cxx/Debug/2f4q2429/x86/CMakeFiles/rebuild_cache.dir

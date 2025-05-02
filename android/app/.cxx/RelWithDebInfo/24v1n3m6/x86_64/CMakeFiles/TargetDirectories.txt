@@ -1,0 +1,2 @@
+D:/Office/product_sharing/android/app/.cxx/RelWithDebInfo/24v1n3m6/x86_64/CMakeFiles/edit_cache.dir
+D:/Office/product_sharing/android/app/.cxx/RelWithDebInfo/24v1n3m6/x86_64/CMakeFiles/rebuild_cache.dir

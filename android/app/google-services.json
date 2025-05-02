@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "215838776881",
+    "project_id": "tamizen-network",
+    "storage_bucket": "tamizen-network.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:215838776881:android:5057cd0a34cbe8f1053f10",
+        "android_client_info": {
+          "package_name": "com.smart.tamizen_network"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyClpZlgnRs2NwfnBVA4ph0ADoeEC8SPKO4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
