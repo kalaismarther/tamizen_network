@@ -1,0 +1,1 @@
+C:\Users\user\AndroidStudioProjects\Flutter\product_sharing\build\app\intermediates\cxx\RelWithDebInfo\22s1g516\obj\x86

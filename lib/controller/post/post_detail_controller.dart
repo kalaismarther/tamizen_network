@@ -88,27 +88,29 @@ class PostDetailController extends GetxController {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text('Email'),
-              Row(
-                children: [
-                  Expanded(
-                    child: Text(
-                      ownerEmail.value,
-                      style: TextStyle(
-                          fontSize: 16.sp, fontWeight: FontWeight.w600),
+              if (ownerEmail.value.isNotEmpty) ...[
+                const Text('Email'),
+                Row(
+                  children: [
+                    Expanded(
+                      child: Text(
+                        ownerEmail.value,
+                        style: TextStyle(
+                            fontSize: 16.sp, fontWeight: FontWeight.w600),
+                      ),
                     ),
-                  ),
-                  IconButton(
-                    onPressed: () {
-                      LauncherHelper.openMailApp(ownerEmail.value);
-                    },
-                    icon: Image.asset(
-                      AppImages.mail,
-                      height: 30.sp,
-                    ),
-                  )
-                ],
-              ),
+                    IconButton(
+                      onPressed: () {
+                        LauncherHelper.openMailApp(ownerEmail.value);
+                      },
+                      icon: Image.asset(
+                        AppImages.mail,
+                        height: 30.sp,
+                      ),
+                    )
+                  ],
+                ),
+              ],
               if (showOwnerNumber.value) ...[
                 const VerticalSpace(height: 20),
                 const Text('Mobile number'),

@@ -1,5 +1,7 @@
 class AppConstants {
-  static const String apiEndPoint = 'http://18.188.82.54/product_sharing/api/';
+  // static const String apiEndPoint = 'http://18.188.82.54/product_sharing/api/';
+
+  static const String apiEndPoint = 'http://13.244.236.26/product_sharing/api/';
 
   static const String cityListUrl = '${apiEndPoint}city';
   static const String signupUrl = '${apiEndPoint}register';
