@@ -8,6 +8,7 @@ import 'package:product_sharing/controller/profile/profile_controller.dart';
 import 'package:product_sharing/view/screens/chat/chat_list_screen.dart';
 import 'package:product_sharing/view/screens/faq/faq_screen.dart';
 import 'package:product_sharing/view/screens/notification/notification_screen.dart';
+import 'package:product_sharing/view/screens/profile/delete_account_screen.dart';
 import 'package:product_sharing/view/screens/profile/edit_profile_screen.dart';
 import 'package:product_sharing/view/widgets/horizontal_space.dart';
 import 'package:product_sharing/view/widgets/online_image.dart';
@@ -50,7 +51,7 @@ class ProfileScreen extends StatelessWidget {
                     width: 72.sp,
                     radius: 10.sp,
                   ),
-                  const HorizontalSpace(width: 24),
+                  const HorizontalSpace(width: 20),
                   Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -70,6 +71,7 @@ class ProfileScreen extends StatelessWidget {
                       ],
                     ),
                   ),
+                  const HorizontalSpace(width: 12),
                   InkWell(
                     onTap: () async {
                       await Get.to(() => const EditProfileScreen());
@@ -133,6 +135,22 @@ class ProfileScreen extends StatelessWidget {
                   onTap: () => Get.to(() => const FaqScreen()),
                   image: AppImages.menuHelp,
                   text: 'Help & Support',
+                ),
+                ListTile(
+                  contentPadding: EdgeInsets.symmetric(horizontal: 16.sp),
+                  onTap: () => Get.to(() => const DeleteAccountScreen()),
+                  leading: Icon(
+                    Icons.delete_outline,
+                    size: 22.sp,
+                    color: Theme.of(context).colorScheme.primary,
+                  ),
+                  title: Text(
+                    'Delete Account',
+                    style:
+                        TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w500),
+                  ),
+                  trailing: Icon(Icons.arrow_forward_ios,
+                      size: 16.sp, color: Colors.grey),
                 ),
                 ProfileMenuItem(
                   onTap: controller.showLogoutAlert,

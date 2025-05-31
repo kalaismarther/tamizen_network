@@ -59,10 +59,11 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyC_oJG2m9OH2zHMOn2yrImfe7zrjSgr5F8',
-    appId: '1:215838776881:ios:047ae0320fef3183053f10',
+    appId: '1:215838776881:ios:38596c3366fb6668053f10',
     messagingSenderId: '215838776881',
     projectId: 'tamizen-network',
     storageBucket: 'tamizen-network.firebasestorage.app',
-    iosBundleId: 'com.example.productSharing',
+    iosBundleId: 'com.smart.tamizennetwork',
   );
+
 }

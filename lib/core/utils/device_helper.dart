@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:device_info_plus/device_info_plus.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 
@@ -36,6 +37,9 @@ class DeviceHelper {
     final fcm = FirebaseMessaging.instance;
     String? token =
         Platform.isIOS ? await fcm.getAPNSToken() : await fcm.getToken();
+    if (kDebugMode) {
+      print('FCM TOKEN --- $token');
+    }
     return token ?? 'fcmtoken';
   }
 }

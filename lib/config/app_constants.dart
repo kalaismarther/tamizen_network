@@ -1,7 +1,10 @@
 class AppConstants {
   // static const String apiEndPoint = 'http://18.188.82.54/product_sharing/api/';
 
-  static const String apiEndPoint = 'http://13.244.236.26/product_sharing/api/';
+  // static const String apiEndPoint =
+  //     'https://13.244.236.26/product_sharing/api/';
+
+  static const String apiEndPoint = 'https://tamizen.com/api/';
 
   static const String cityListUrl = '${apiEndPoint}city';
   static const String signupUrl = '${apiEndPoint}register';
@@ -35,4 +38,5 @@ class AppConstants {
   static const String reportChatUrl = '${apiEndPoint}report_post';
   static const String addLikeUrl = '${apiEndPoint}add_like';
   static const String logoutUrl = '${apiEndPoint}logout';
+  static const String deleteAccountUrl = '${apiEndPoint}delete_account';
 }

@@ -250,37 +250,53 @@ class HomeScreen extends StatelessWidget {
 
                           SizedBox(
                             height: 224.sp,
-                            child: Obx(
-                              () => controller.latestPostsLoading.value
-                                  ? ListView.separated(
-                                      itemCount: 3,
-                                      shrinkWrap: true,
-                                      scrollDirection: Axis.horizontal,
-                                      separatorBuilder: (context, index) =>
-                                          const HorizontalSpace(width: 20),
-                                      itemBuilder: (context, index) =>
-                                          const LoadingPostItem(
-                                            showInList: true,
-                                          ))
-                                  : ListView.separated(
-                                      itemCount:
-                                          controller.latestPostList.length,
-                                      shrinkWrap: true,
-                                      scrollDirection: Axis.horizontal,
-                                      physics: const BouncingScrollPhysics(),
-                                      separatorBuilder: (context, index) =>
-                                          const HorizontalSpace(width: 20),
-                                      itemBuilder: (context, index) => PostItem(
-                                        post: controller.latestPostList[index],
-                                        showInList: true,
-                                        onWishlistTap: () {
-                                          controller.toggleWishlist(
-                                              controller.latestPostList[index]);
-                                        },
-                                        type: 'Newest',
-                                      ),
-                                    ),
-                            ),
+                            child: Obx(() {
+                              if (controller.latestPostsLoading.value) {
+                                return ListView.separated(
+                                    itemCount: 3,
+                                    shrinkWrap: true,
+                                    scrollDirection: Axis.horizontal,
+                                    separatorBuilder: (context, index) =>
+                                        const HorizontalSpace(width: 20),
+                                    itemBuilder: (context, index) =>
+                                        const LoadingPostItem(
+                                          showInList: true,
+                                        ));
+                              }
+
+                              if (controller.latestPostListError.value !=
+                                  null) {
+                                return Center(
+                                  child: Text(
+                                      controller.latestPostListError.value ??
+                                          'Something went wrong'),
+                                );
+                              }
+
+                              if (controller.latestPostList.isEmpty) {
+                                return const Center(
+                                  child: Text('No latest post found'),
+                                );
+                              }
+
+                              return ListView.separated(
+                                itemCount: controller.latestPostList.length,
+                                shrinkWrap: true,
+                                scrollDirection: Axis.horizontal,
+                                physics: const BouncingScrollPhysics(),
+                                separatorBuilder: (context, index) =>
+                                    const HorizontalSpace(width: 20),
+                                itemBuilder: (context, index) => PostItem(
+                                  post: controller.latestPostList[index],
+                                  showInList: true,
+                                  onWishlistTap: () {
+                                    controller.toggleWishlist(
+                                        controller.latestPostList[index]);
+                                  },
+                                  type: 'Newest',
+                                ),
+                              );
+                            }),
                           ),
 
                           const VerticalSpace(height: 16),
@@ -304,47 +320,60 @@ class HomeScreen extends StatelessWidget {
                             ],
                           ),
                           const VerticalSpace(height: 8),
-                          Obx(
-                            () => controller.popularPostsLoading.value
-                                ? GridView.builder(
-                                    shrinkWrap: true,
-                                    physics:
-                                        const NeverScrollableScrollPhysics(),
-                                    itemCount: 2,
-                                    padding: const EdgeInsets.all(0),
-                                    gridDelegate:
-                                        SliverGridDelegateWithFixedCrossAxisCount(
-                                      crossAxisCount: 2,
-                                      childAspectRatio: 0.78,
-                                      mainAxisSpacing: 30.sp,
-                                      crossAxisSpacing: 24.sp,
-                                    ),
-                                    itemBuilder: (context, index) =>
-                                        const LoadingPostItem())
-                                : GridView.builder(
-                                    shrinkWrap: true,
-                                    physics:
-                                        const NeverScrollableScrollPhysics(),
-                                    itemCount:
-                                        controller.popularPostList.length,
-                                    padding: const EdgeInsets.all(0),
-                                    gridDelegate:
-                                        SliverGridDelegateWithFixedCrossAxisCount(
-                                      crossAxisCount: 2,
-                                      childAspectRatio: 0.78,
-                                      mainAxisSpacing: 30.sp,
-                                      crossAxisSpacing: 24.sp,
-                                    ),
-                                    itemBuilder: (context, index) => PostItem(
-                                      post: controller.popularPostList[index],
-                                      onWishlistTap: () {
-                                        controller.toggleWishlist(
-                                            controller.popularPostList[index]);
-                                      },
-                                      type: 'Popular',
-                                    ),
+                          Obx(() {
+                            if (controller.popularPostsLoading.value) {
+                              return GridView.builder(
+                                  shrinkWrap: true,
+                                  physics: const NeverScrollableScrollPhysics(),
+                                  itemCount: 2,
+                                  padding: const EdgeInsets.all(0),
+                                  gridDelegate:
+                                      SliverGridDelegateWithFixedCrossAxisCount(
+                                    crossAxisCount: 2,
+                                    childAspectRatio: 0.78,
+                                    mainAxisSpacing: 30.sp,
+                                    crossAxisSpacing: 24.sp,
                                   ),
-                          ),
+                                  itemBuilder: (context, index) =>
+                                      const LoadingPostItem());
+                            }
+
+                            if (controller.popularPostListError.value != null) {
+                              return Center(
+                                child: Text(
+                                    controller.popularPostListError.value ??
+                                        'Something went wrong'),
+                              );
+                            }
+
+                            if (controller.popularPostList.isEmpty) {
+                              return const Center(
+                                child: Text('No popular post found'),
+                              );
+                            }
+
+                            return GridView.builder(
+                              shrinkWrap: true,
+                              physics: const NeverScrollableScrollPhysics(),
+                              itemCount: controller.popularPostList.length,
+                              padding: const EdgeInsets.all(0),
+                              gridDelegate:
+                                  SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: 2,
+                                childAspectRatio: 0.78,
+                                mainAxisSpacing: 30.sp,
+                                crossAxisSpacing: 24.sp,
+                              ),
+                              itemBuilder: (context, index) => PostItem(
+                                post: controller.popularPostList[index],
+                                onWishlistTap: () {
+                                  controller.toggleWishlist(
+                                      controller.popularPostList[index]);
+                                },
+                                type: 'Popular',
+                              ),
+                            );
+                          }),
                           const VerticalSpace(height: 16),
                         ],
                       ),

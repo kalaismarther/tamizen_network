@@ -82,7 +82,11 @@ class PostDetailController extends GetxController {
     }
   }
 
-  void showContactDialog() => Get.dialog(
+  void showContactDialog() {
+    if (ownerEmail.value.isEmpty && !showOwnerNumber.value) {
+      UiHelper.showToast('No contact details found');
+    } else {
+      Get.dialog(
         AlertDialog(
           content: Column(
             mainAxisSize: MainAxisSize.min,
@@ -139,6 +143,8 @@ class PostDetailController extends GetxController {
           ),
         ),
       );
+    }
+  }
 
   Future<void> sendRequestToOwner() async {
     try {

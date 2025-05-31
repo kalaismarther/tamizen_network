@@ -533,6 +533,27 @@ class ApiServices {
     }
   }
 
+  static Future<String> deleteUserAccount() async {
+    final user = StorageHelper.getUserDetail();
+    final response = await DioHelper.postHttpMethod(
+        url: AppConstants.deleteAccountUrl,
+        headers: _headersWithToken(),
+        input: {'user_id': user.id});
+
+    if (response.success) {
+      if (response.body['status']?.toString() == '1') {
+        return response.body['message']?.toString() ?? '';
+      } else if (response.body['status']?.toString() == '5') {
+        AuthHelper.logoutUser();
+        throw Exception(response.body['message']?.toString() ?? '');
+      } else {
+        throw Exception(response.body['message']?.toString() ?? '');
+      }
+    } else {
+      throw Exception(response.error);
+    }
+  }
+
   static Future<Map<dynamic, dynamic>> searchHistory() async {
     final user = StorageHelper.getUserDetail();
     final response = await DioHelper.postHttpMethod(

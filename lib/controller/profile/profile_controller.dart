@@ -59,4 +59,17 @@ class ProfileController extends GetxController {
           ],
         ),
       );
+
+  Future<void> deleteAccount() async {
+    try {
+      UiHelper.showLoadingDialog();
+      await ApiServices.deleteUserAccount();
+      UiHelper.closeLoadingDialog();
+      AuthHelper.logoutUser(message: 'Account Deleted Successfully');
+    } catch (e) {
+      UiHelper.showErrorMessage(e.toString());
+    } finally {
+      UiHelper.closeLoadingDialog();
+    }
+  }
 }

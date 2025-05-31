@@ -11,6 +11,7 @@ class AppTheme {
   static const Color grey = Color(0xFff9f9f9);
   static const Color darkgrey = Color(0xFF5B5B5B);
   static const Color inputBg = Color(0xFFF8F7F7);
+
   static ThemeData theme() => ThemeData(
         fontFamily: 'Poppins',
         colorScheme: ColorScheme.fromSeed(
