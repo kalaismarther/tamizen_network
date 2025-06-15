@@ -44,7 +44,7 @@ class SignupScreen extends StatelessWidget {
                     'Sign Up',
                     style: Theme.of(context).textTheme.headlineMedium,
                   ),
-                  const VerticalSpace(height: 48),
+                  const VerticalSpace(height: 40),
                   TextField(
                     onChanged: (value) => controller.name.value = value.trim(),
                     decoration: InputDecoration(
@@ -108,7 +108,10 @@ class SignupScreen extends StatelessWidget {
                             controller.hidePassword.value =
                                 !controller.hidePassword.value;
                           },
-                          icon: Image.asset(AppImages.eyeIcon),
+                          icon: Padding(
+                            padding: EdgeInsets.all(6.sp),
+                            child: Image.asset(AppImages.eyeIcon),
+                          ),
                         ),
                         suffixIconConstraints: BoxConstraints(maxHeight: 28.sp),
                       ),
@@ -211,9 +214,12 @@ class SignupScreen extends StatelessWidget {
                             borderSide: BorderSide.none),
                         suffixIcon: IconButton(
                           onPressed: () {},
-                          icon: Image.asset(
-                            AppImages.searchIcon,
-                            color: Colors.grey,
+                          icon: Padding(
+                            padding: EdgeInsets.all(8.sp),
+                            child: Image.asset(
+                              AppImages.searchIcon,
+                              color: Colors.grey,
+                            ),
                           ),
                         ),
                         suffixIconConstraints: BoxConstraints(maxHeight: 36.sp),
@@ -223,11 +229,15 @@ class SignupScreen extends StatelessWidget {
                   const VerticalSpace(height: 20),
                   Obx(
                     () => Row(
+                      crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
-                        Checkbox(
-                          value: controller.agreedToTerms.value,
-                          onChanged: (value) =>
-                              controller.agreedToTerms.value = value!,
+                        SizedBox(
+                          height: 24.sp,
+                          child: Checkbox(
+                            value: controller.agreedToTerms.value,
+                            onChanged: (value) =>
+                                controller.agreedToTerms.value = value!,
+                          ),
                         ),
                         Expanded(
                           child: RichText(
@@ -235,10 +245,14 @@ class SignupScreen extends StatelessWidget {
                               style: TextStyle(
                                   color: Colors.black, height: 1.4.sp),
                               children: [
-                                TextSpan(text: "I agree to the "),
+                                TextSpan(
+                                  text: "I agree to the ",
+                                  style: TextStyle(fontSize: 11.sp),
+                                ),
                                 TextSpan(
                                   text: "Terms & Conditions",
                                   style: TextStyle(
+                                      fontSize: 11.sp,
                                       color: Colors.blue,
                                       decoration: TextDecoration.underline),
                                   recognizer: TapGestureRecognizer()
@@ -247,10 +261,14 @@ class SignupScreen extends StatelessWidget {
                                               type: 'TERM_POLICY',
                                             )),
                                 ),
-                                const TextSpan(text: " and "),
+                                TextSpan(
+                                  text: " and ",
+                                  style: TextStyle(fontSize: 11.sp),
+                                ),
                                 TextSpan(
                                   text: "Privacy Policy",
-                                  style: const TextStyle(
+                                  style: TextStyle(
+                                      fontSize: 11.sp,
                                       color: Colors.blue,
                                       decoration: TextDecoration.underline),
                                   recognizer: TapGestureRecognizer()
@@ -268,6 +286,7 @@ class SignupScreen extends StatelessWidget {
                   ),
                   const VerticalSpace(height: 20),
                   GradientButton(onPressed: controller.signUp, text: 'Sign Up'),
+                  const VerticalSpace(height: 4),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [

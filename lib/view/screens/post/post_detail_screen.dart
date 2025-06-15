@@ -12,6 +12,7 @@ import 'package:product_sharing/view/widgets/loading_post_item.dart';
 import 'package:product_sharing/view/widgets/online_image.dart';
 import 'package:product_sharing/view/widgets/post_item.dart';
 import 'package:product_sharing/view/widgets/primary_appbar.dart';
+import 'package:product_sharing/view/widgets/report_post_dialog.dart';
 import 'package:product_sharing/view/widgets/vertical_space.dart';
 
 class PostDetailScreen extends StatelessWidget {
@@ -27,7 +28,28 @@ class PostDetailScreen extends StatelessWidget {
         top: false,
         bottom: true,
         child: Scaffold(
-          appBar: const PrimaryAppbar(title: 'Post Detail'),
+          appBar: PrimaryAppbar(
+            title: 'Post Detail',
+            actions: [
+              PopupMenuButton(
+                color: Colors.white,
+                itemBuilder: (context) => [
+                  PopupMenuItem(
+                    onTap: () {
+                      showDialog(
+                        context: context,
+                        builder: (context) =>
+                            ReportPostDialog(onSubmit: controller.reportPost),
+                      );
+                    },
+                    child: const Text(
+                      'Report Post',
+                    ),
+                  )
+                ],
+              )
+            ],
+          ),
           body: Obx(
             () => controller.isLoading.value
                 ? const Center(

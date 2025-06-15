@@ -11,6 +11,7 @@ import 'package:product_sharing/model/post/add_wishlist_request_model.dart';
 import 'package:product_sharing/model/post/post_detail_request_model.dart';
 import 'package:product_sharing/model/post/post_list_request_model.dart';
 import 'package:product_sharing/model/post/post_model.dart';
+import 'package:product_sharing/model/post/report_post_request_model.dart';
 import 'package:product_sharing/model/post/send_request_model.dart';
 import 'package:product_sharing/view/widgets/vertical_space.dart';
 
@@ -38,6 +39,8 @@ class PostDetailController extends GetxController {
   var error = Rxn<String>();
   var alreadyRequested = false.obs;
   var activePost = true.obs;
+
+  final reportController = TextEditingController();
 
   @override
   void onInit() async {
@@ -236,6 +239,26 @@ class PostDetailController extends GetxController {
       homeController.toggleWishlistIcon(post, added);
     } catch (e) {
       //
+    }
+  }
+
+  Future<void> reportPost() async {
+    try {
+      UiHelper.showLoadingDialog();
+      final user = StorageHelper.getUserDetail();
+
+      final input = ReportPostRequestModel(
+          userId: user.id,
+          postId: post.id,
+          reason: reportController.text.trim());
+
+      final result = await ApiServices.reportPost(input);
+
+      UiHelper.showToast(result);
+    } catch (e) {
+      UiHelper.showErrorMessage(e.toString());
+    } finally {
+      UiHelper.closeLoadingDialog();
     }
   }
 }

@@ -16,15 +16,18 @@ class ProfileMenuItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      contentPadding: EdgeInsets.symmetric(horizontal: 16.sp),
+      contentPadding: EdgeInsets.symmetric(horizontal: 16.sp, vertical: 4.sp),
       leading: Image.asset(
         image,
         height: 22.sp,
         color: Theme.of(context).colorScheme.primary,
       ),
-      title: Text(
-        text,
-        style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w500),
+      title: Padding(
+        padding: EdgeInsets.only(left: 4.sp),
+        child: Text(
+          text,
+          style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w500),
+        ),
       ),
       trailing: Icon(Icons.arrow_forward_ios, size: 16.sp, color: Colors.grey),
       onTap: onTap,

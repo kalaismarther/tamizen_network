@@ -19,13 +19,13 @@ class BottomNavBar extends StatelessWidget {
         alignment: Alignment.bottomCenter,
         children: [
           CustomPaint(
-            size: Size(MediaQuery.of(context).size.width, 70),
+            size: Size(MediaQuery.of(context).size.width, 70.sp),
             painter: BNBCustomPainter(),
           ),
           Positioned(
             bottom: 0,
             child: Container(
-              height: 70,
+              height: 70.sp,
               width: DeviceHelper.screenWidth(context),
               decoration: const BoxDecoration(
                 color: Colors.white,

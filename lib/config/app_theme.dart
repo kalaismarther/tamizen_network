@@ -71,25 +71,25 @@ class AppTheme {
             color: Colors.red.shade700,
           ),
           contentPadding:
-              const EdgeInsets.symmetric(vertical: 10, horizontal: 18),
+              EdgeInsets.symmetric(vertical: 10.w, horizontal: 18.w),
           border: OutlineInputBorder(
             borderSide: BorderSide(color: Colors.grey.shade300),
-            borderRadius: BorderRadius.circular(10),
+            borderRadius: BorderRadius.circular(10.r),
           ),
           enabledBorder: OutlineInputBorder(
             borderSide: BorderSide(color: Colors.grey.shade300),
-            borderRadius: BorderRadius.circular(10),
+            borderRadius: BorderRadius.circular(10.r),
           ),
           focusedBorder: OutlineInputBorder(
             borderSide: BorderSide(color: Colors.grey.shade300),
-            borderRadius: BorderRadius.circular(10),
+            borderRadius: BorderRadius.circular(10.r),
           ),
           errorBorder: OutlineInputBorder(
             borderSide: BorderSide(color: Colors.grey.shade400),
-            borderRadius: BorderRadius.circular(10),
+            borderRadius: BorderRadius.circular(10.r),
           ),
         ),
-        tabBarTheme: const TabBarTheme(
+        tabBarTheme: const TabBarThemeData(
             labelStyle:
                 TextStyle(fontFamily: 'Poppins', fontWeight: FontWeight.w500),
             unselectedLabelStyle:
@@ -97,7 +97,7 @@ class AppTheme {
         dividerTheme: DividerThemeData(color: Colors.grey.shade300),
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
-            minimumSize: const Size(double.infinity, 48),
+            minimumSize: Size(double.infinity, 48.sp),
             backgroundColor: blue,
             foregroundColor: Colors.white,
             shape: RoundedRectangleBorder(

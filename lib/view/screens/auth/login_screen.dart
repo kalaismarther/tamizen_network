@@ -43,42 +43,44 @@ class LoginScreen extends StatelessWidget {
                     'Login',
                     style: Theme.of(context).textTheme.headlineMedium,
                   ),
-                  const VerticalSpace(height: 48),
+                  const VerticalSpace(height: 40),
                   TextField(
-                    onChanged: (value) => controller.email.value = value.trim(),
+                    controller: controller.emailController,
                     decoration: InputDecoration(
                       hintText: 'Email',
+                      enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(50.r),
+                          borderSide: BorderSide.none),
+                      focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(50.r),
+                          borderSide: BorderSide.none),
+                    ),
+                  ),
+                  const VerticalSpace(height: 24),
+                  TextField(
+                    controller: controller.passwordController,
+                    obscureText: controller.hidePassword.value,
+                    decoration: InputDecoration(
+                      hintText: 'Password',
                       enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(50),
                           borderSide: BorderSide.none),
                       focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(50),
                           borderSide: BorderSide.none),
-                    ),
-                  ),
-                  const VerticalSpace(height: 24),
-                  Obx(
-                    () => TextField(
-                      obscureText: controller.hidePassword.value,
-                      onChanged: (value) =>
-                          controller.password.value = value.trim(),
-                      decoration: InputDecoration(
-                        hintText: 'Password',
-                        enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(50),
-                            borderSide: BorderSide.none),
-                        focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(50),
-                            borderSide: BorderSide.none),
-                        suffixIcon: IconButton(
+                      suffixIcon: Padding(
+                        padding: EdgeInsets.all(7.sp),
+                        child: IconButton(
                           onPressed: () {
                             controller.hidePassword.value =
                                 !controller.hidePassword.value;
                           },
-                          icon: Image.asset(AppImages.eyeIcon),
+                          icon: Image.asset(
+                            AppImages.eyeIcon,
+                          ),
                         ),
-                        suffixIconConstraints: BoxConstraints(maxHeight: 28.sp),
                       ),
+                      suffixIconConstraints: BoxConstraints(maxHeight: 28.sp),
                     ),
                   ),
                   Align(
@@ -96,6 +98,7 @@ class LoginScreen extends StatelessWidget {
                   ),
                   const VerticalSpace(height: 20),
                   GradientButton(onPressed: controller.login, text: 'Login'),
+                  const VerticalSpace(height: 10),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [

@@ -33,6 +33,7 @@ import 'package:product_sharing/model/post/post_detail_request_model.dart';
 import 'package:product_sharing/model/post/post_list_request_model.dart';
 import 'package:product_sharing/model/post/post_model.dart';
 import 'package:dio/dio.dart' as dio;
+import 'package:product_sharing/model/post/report_post_request_model.dart';
 import 'package:product_sharing/model/post/requested_customer_list_request_model.dart';
 import 'package:product_sharing/model/post/requested_customer_model.dart';
 import 'package:product_sharing/model/post/send_request_model.dart';
@@ -289,6 +290,26 @@ class ApiServices {
     if (response.success) {
       if (response.body['status']?.toString() == '1') {
         return response.body['data'] ?? {};
+      } else if (response.body['status']?.toString() == '5') {
+        AuthHelper.logoutUser();
+        throw Exception(response.body['message']?.toString() ?? '');
+      } else {
+        throw Exception(response.body['message']?.toString() ?? '');
+      }
+    } else {
+      throw Exception(response.error);
+    }
+  }
+
+  static Future<String> reportPost(ReportPostRequestModel input) async {
+    final response = await DioHelper.postHttpMethod(
+        url: AppConstants.reportChatUrl,
+        headers: _headersWithToken(),
+        input: input.toJson());
+
+    if (response.success) {
+      if (response.body['status']?.toString() == '1') {
+        return response.body['message']?.toString() ?? '';
       } else if (response.body['status']?.toString() == '5') {
         AuthHelper.logoutUser();
         throw Exception(response.body['message']?.toString() ?? '');

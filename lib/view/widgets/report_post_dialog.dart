@@ -2,17 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/route_manager.dart';
 import 'package:get/state_manager.dart';
-import 'package:product_sharing/controller/chat/chat_list_controller.dart';
+import 'package:product_sharing/controller/post/post_detail_controller.dart';
 import 'package:product_sharing/view/widgets/vertical_space.dart';
 
-class ReportChatDialog extends StatelessWidget {
-  const ReportChatDialog({super.key, required this.onSubmit});
+class ReportPostDialog extends StatelessWidget {
+  const ReportPostDialog({super.key, required this.onSubmit});
 
   final Function() onSubmit;
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<ChatListController>(
+    return GetBuilder<PostDetailController>(
       builder: (controller) => Dialog(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(20),

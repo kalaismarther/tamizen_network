@@ -20,6 +20,7 @@ class PrimaryAppbar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
+      toolbarHeight: 62.sp,
       title: Text(
         title,
         style: TextStyle(fontSize: 20.sp),
@@ -43,5 +44,5 @@ class PrimaryAppbar extends StatelessWidget implements PreferredSizeWidget {
   }
 
   @override
-  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
+  Size get preferredSize => Size.fromHeight(60.sp);
 }

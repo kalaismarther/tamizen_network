@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:product_sharing/core/services/api_services.dart';
 import 'package:product_sharing/core/utils/device_helper.dart';
@@ -9,19 +10,21 @@ import 'package:product_sharing/view/screens/auth/verification_screen.dart';
 import 'package:product_sharing/view/screens/dashboard/dashboard_screen.dart';
 
 class LoginController extends GetxController {
-  var email = ''.obs;
-  var password = ''.obs;
+
+
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
 
   RxBool hidePassword = true.obs;
 
   bool validateAll() {
-    if (email.value.isEmpty) {
+    if (emailController.text.isEmpty) {
       UiHelper.showToast('Please enter email address');
       return false;
-    } else if (!ValidationHelper.emailRegex.hasMatch(email.value)) {
+    } else if (!ValidationHelper.emailRegex.hasMatch(emailController.text)) {
       UiHelper.showToast('Invalid email address');
       return false;
-    } else if (password.value.isEmpty || password.value.length < 6) {
+    } else if (passwordController.text.isEmpty || passwordController.text.length < 6) {
       UiHelper.showToast('Password must be 6 characters');
       return false;
     } else {
@@ -38,8 +41,8 @@ class LoginController extends GetxController {
         UiHelper.showLoadingDialog();
         final device = await DeviceHelper.getDeviceInfo();
         var input = LoginRequestModel(
-            email: email.value.trim(),
-            password: password.value.trim(),
+            email: emailController.text.trim(),
+            password: passwordController.text.trim(),
             deviceType: device.type,
             deviceId: device.id,
             fcmId: 'dksk');
