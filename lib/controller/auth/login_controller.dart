@@ -10,8 +10,6 @@ import 'package:product_sharing/view/screens/auth/verification_screen.dart';
 import 'package:product_sharing/view/screens/dashboard/dashboard_screen.dart';
 
 class LoginController extends GetxController {
-
-
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
 
@@ -24,7 +22,8 @@ class LoginController extends GetxController {
     } else if (!ValidationHelper.emailRegex.hasMatch(emailController.text)) {
       UiHelper.showToast('Invalid email address');
       return false;
-    } else if (passwordController.text.isEmpty || passwordController.text.length < 6) {
+    } else if (passwordController.text.isEmpty ||
+        passwordController.text.length < 6) {
       UiHelper.showToast('Password must be 6 characters');
       return false;
     } else {

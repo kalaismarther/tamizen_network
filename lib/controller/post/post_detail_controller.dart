@@ -253,7 +253,7 @@ class PostDetailController extends GetxController {
           reason: reportController.text.trim());
 
       final result = await ApiServices.reportPost(input);
-
+      reportController.clear();
       UiHelper.showToast(result);
     } catch (e) {
       UiHelper.showErrorMessage(e.toString());
