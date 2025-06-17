@@ -303,7 +303,7 @@ class ApiServices {
 
   static Future<String> reportPost(ReportPostRequestModel input) async {
     final response = await DioHelper.postHttpMethod(
-        url: AppConstants.reportChatUrl,
+        url: AppConstants.reportPostUrl,
         headers: _headersWithToken(),
         input: input.toJson());
 

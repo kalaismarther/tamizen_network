@@ -22,6 +22,7 @@ class AppConstants {
   static const String requestedCustomersUrl = '${apiEndPoint}request_list';
   static const String addPostUrl = '${apiEndPoint}create_post';
   static const String deletePostUrl = '${apiEndPoint}delete';
+  static const String reportPostUrl = '${apiEndPoint}report_product';
 
   static const String addToWishlistUrl = '${apiEndPoint}add_wishlist';
   static const String helpAndSupportUrl = '${apiEndPoint}help_and_support';
