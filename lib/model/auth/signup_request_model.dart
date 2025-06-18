@@ -20,7 +20,7 @@ class SignupRequestModel {
         'name': name,
         'email': email,
         'password': password,
-        'mobile': mobile,
+        if (mobile.isNotEmpty) 'mobile': mobile,
         'city_id': city.id,
         'device_type': deviceType,
       };

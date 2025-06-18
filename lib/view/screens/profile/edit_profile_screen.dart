@@ -121,23 +121,25 @@ class EditProfileScreen extends StatelessWidget {
                             const InputDecoration(hintText: 'Enter your email'),
                       ),
                       const VerticalSpace(height: 24),
-                      Text(
-                        'Mobile Number',
-                        style: Theme.of(context).textTheme.labelMedium,
-                      ),
-                      const VerticalSpace(height: 6),
-                      TextField(
-                        controller: controller.mobileNumber,
-                        maxLength: 12,
-                        keyboardType: TextInputType.number,
-                        inputFormatters: [
-                          FilteringTextInputFormatter.digitsOnly
-                        ],
-                        decoration: const InputDecoration(
-                            counterText: '',
-                            hintText: 'Enter your mobile number'),
-                      ),
-                      const VerticalSpace(height: 24),
+                      if (controller.mobileNumber.text.isNotEmpty) ...[
+                        Text(
+                          'Mobile Number',
+                          style: Theme.of(context).textTheme.labelMedium,
+                        ),
+                        const VerticalSpace(height: 6),
+                        TextField(
+                          controller: controller.mobileNumber,
+                          maxLength: 12,
+                          keyboardType: TextInputType.number,
+                          inputFormatters: [
+                            FilteringTextInputFormatter.digitsOnly
+                          ],
+                          decoration: const InputDecoration(
+                              counterText: '',
+                              hintText: 'Enter your mobile number'),
+                        ),
+                        const VerticalSpace(height: 24),
+                      ],
                       Text(
                         'City',
                         style: Theme.of(context).textTheme.labelMedium,

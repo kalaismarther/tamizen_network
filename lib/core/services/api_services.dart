@@ -26,6 +26,7 @@ import 'package:product_sharing/model/notification/notification_model.dart';
 import 'package:product_sharing/model/notification/notification_request_model.dart';
 import 'package:product_sharing/model/post/add_post_request_model.dart';
 import 'package:product_sharing/model/post/add_wishlist_request_model.dart';
+import 'package:product_sharing/model/post/block_post_request_model.dart';
 import 'package:product_sharing/model/post/delete_post_image_request_model.dart';
 import 'package:product_sharing/model/post/delete_post_request_model.dart';
 import 'package:product_sharing/model/post/edit_post_request_model.dart';
@@ -304,6 +305,26 @@ class ApiServices {
   static Future<String> reportPost(ReportPostRequestModel input) async {
     final response = await DioHelper.postHttpMethod(
         url: AppConstants.reportPostUrl,
+        headers: _headersWithToken(),
+        input: input.toJson());
+
+    if (response.success) {
+      if (response.body['status']?.toString() == '1') {
+        return response.body['message']?.toString() ?? '';
+      } else if (response.body['status']?.toString() == '5') {
+        AuthHelper.logoutUser();
+        throw Exception(response.body['message']?.toString() ?? '');
+      } else {
+        throw Exception(response.body['message']?.toString() ?? '');
+      }
+    } else {
+      throw Exception(response.error);
+    }
+  }
+
+  static Future<String> blockPost(BlockPostRequestModel input) async {
+    final response = await DioHelper.postHttpMethod(
+        url: AppConstants.blockPostUrl,
         headers: _headersWithToken(),
         input: input.toJson());
 

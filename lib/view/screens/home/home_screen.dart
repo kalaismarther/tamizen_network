@@ -4,10 +4,12 @@ import 'package:get/get.dart';
 import 'package:product_sharing/config/app_images.dart';
 import 'package:product_sharing/controller/dashboard/dashboard_controller.dart';
 import 'package:product_sharing/controller/home/home_controller.dart';
+import 'package:product_sharing/controller/post/post_detail_controller.dart';
 import 'package:product_sharing/core/utils/device_helper.dart';
 import 'package:product_sharing/view/screens/category/category_list_screen.dart';
 import 'package:product_sharing/view/screens/category/category_posts_screen.dart';
 import 'package:product_sharing/view/screens/notification/notification_screen.dart';
+import 'package:product_sharing/view/screens/post/post_detail_screen.dart';
 import 'package:product_sharing/view/screens/post/see_all_post_screen.dart';
 import 'package:product_sharing/view/screens/profile/edit_profile_screen.dart';
 import 'package:product_sharing/view/screens/search/search_screen.dart';
@@ -289,6 +291,18 @@ class HomeScreen extends StatelessWidget {
                                 itemBuilder: (context, index) => PostItem(
                                   post: controller.latestPostList[index],
                                   showInList: true,
+                                  onTap: () async {
+                                    Get.delete<PostDetailController>();
+                                    await Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                PostDetailScreen(
+                                                    post: controller
+                                                            .latestPostList[
+                                                        index])));
+                                    controller.loadHomeContent();
+                                  },
                                   onWishlistTap: () {
                                     controller.toggleWishlist(
                                         controller.latestPostList[index]);
@@ -366,6 +380,18 @@ class HomeScreen extends StatelessWidget {
                               ),
                               itemBuilder: (context, index) => PostItem(
                                 post: controller.popularPostList[index],
+                                onTap: () async {
+                                  Get.delete<PostDetailController>();
+                                  await Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              PostDetailScreen(
+                                                  post: controller
+                                                          .popularPostList[
+                                                      index])));
+                                  controller.loadHomeContent();
+                                },
                                 onWishlistTap: () {
                                   controller.toggleWishlist(
                                       controller.popularPostList[index]);

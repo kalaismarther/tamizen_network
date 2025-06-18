@@ -3,7 +3,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:product_sharing/config/app_images.dart';
 import 'package:product_sharing/controller/category/category_posts_controller.dart';
+import 'package:product_sharing/controller/post/post_detail_controller.dart';
 import 'package:product_sharing/model/category/category_model.dart';
+import 'package:product_sharing/view/screens/post/post_detail_screen.dart';
 import 'package:product_sharing/view/screens/search/search_screen.dart';
 import 'package:product_sharing/view/widgets/loading_post_item.dart';
 import 'package:product_sharing/view/widgets/post_item.dart';
@@ -103,6 +105,18 @@ class CategoryPostsScreen extends StatelessWidget {
                                     controller.categoryPostList.length
                                 ? PostItem(
                                     post: controller.categoryPostList[index],
+                                    onTap: () async {
+                                      Get.delete<PostDetailController>();
+                                      await Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  PostDetailScreen(
+                                                      post: controller
+                                                              .categoryPostList[
+                                                          index])));
+                                      controller.onInit();
+                                    },
                                     onWishlistTap: () {
                                       controller.toggleWishlist(
                                           controller.categoryPostList[index]);

@@ -51,7 +51,7 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyClpZlgnRs2NwfnBVA4ph0ADoeEC8SPKO4',
-    appId: '1:215838776881:android:5057cd0a34cbe8f1053f10',
+    appId: '1:215838776881:android:49f359ce01f3cb6b053f10',
     messagingSenderId: '215838776881',
     projectId: 'tamizen-network',
     storageBucket: 'tamizen-network.firebasestorage.app',
@@ -65,5 +65,4 @@ class DefaultFirebaseOptions {
     storageBucket: 'tamizen-network.firebasestorage.app',
     iosBundleId: 'com.smart.tamizennetwork',
   );
-
 }

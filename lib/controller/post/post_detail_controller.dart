@@ -8,6 +8,7 @@ import 'package:product_sharing/core/utils/launcher_helper.dart';
 import 'package:product_sharing/core/utils/storage_helper.dart';
 import 'package:product_sharing/core/utils/ui_helper.dart';
 import 'package:product_sharing/model/post/add_wishlist_request_model.dart';
+import 'package:product_sharing/model/post/block_post_request_model.dart';
 import 'package:product_sharing/model/post/post_detail_request_model.dart';
 import 'package:product_sharing/model/post/post_list_request_model.dart';
 import 'package:product_sharing/model/post/post_model.dart';
@@ -259,6 +260,26 @@ class PostDetailController extends GetxController {
       UiHelper.showErrorMessage(e.toString());
     } finally {
       UiHelper.closeLoadingDialog();
+    }
+  }
+
+  Future<bool> blockPost() async {
+    try {
+      UiHelper.showLoadingDialog();
+      final user = StorageHelper.getUserDetail();
+
+      final input = BlockPostRequestModel(userId: user.id, postId: post.id);
+
+      final result = await ApiServices.blockPost(input);
+
+      UiHelper.showToast(result);
+      UiHelper.closeLoadingDialog();
+      Get.back();
+      return true;
+    } catch (e) {
+      UiHelper.closeLoadingDialog();
+      UiHelper.showErrorMessage(e.toString());
+      return false;
     }
   }
 }

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:product_sharing/controller/post/post_detail_controller.dart';
 import 'package:product_sharing/controller/post/see_all_post_controller.dart';
+import 'package:product_sharing/view/screens/post/post_detail_screen.dart';
 import 'package:product_sharing/view/widgets/loading_post_item.dart';
 import 'package:product_sharing/view/widgets/post_item.dart';
 import 'package:product_sharing/view/widgets/primary_appbar.dart';
@@ -44,15 +46,25 @@ class SeeAllPostScreen extends StatelessWidget {
                       mainAxisSpacing: 30.sp,
                       crossAxisSpacing: 24.sp,
                     ),
-                    itemBuilder: (context, index) =>
-                        index < controller.allPostList.length
-                            ? PostItem(
-                                post: controller.allPostList[index],
-                                type: type == '1' ? 'Newest' : 'Popular',
-                                onWishlistTap: () => controller.toggleWishlist(
-                                    controller.allPostList[index]),
-                              )
-                            : const LoadingPostItem(),
+                    itemBuilder: (context, index) => index <
+                            controller.allPostList.length
+                        ? PostItem(
+                            post: controller.allPostList[index],
+                            type: type == '1' ? 'Newest' : 'Popular',
+                            onWishlistTap: () => controller
+                                .toggleWishlist(controller.allPostList[index]),
+                            onTap: () async {
+                              Get.delete<PostDetailController>();
+                              await Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => PostDetailScreen(
+                                          post:
+                                              controller.allPostList[index])));
+                              controller.onInit();
+                            },
+                          )
+                        : const LoadingPostItem(),
                   ),
           ),
         ),

@@ -43,7 +43,36 @@ class PostDetailScreen extends StatelessWidget {
                       );
                     },
                     child: const Text(
-                      'Report Post',
+                      'Report',
+                    ),
+                  ),
+                  PopupMenuItem(
+                    onTap: () {
+                      showDialog(
+                        context: context,
+                        builder: (context) => AlertDialog(
+                          content: Text(
+                              'Do you want to block ${controller.ownerName.value}?'),
+                          actions: [
+                            TextButton(
+                              onPressed: () {
+                                Get.back();
+                              },
+                              child: const Text('No'),
+                            ),
+                            TextButton(
+                              onPressed: () async {
+                                Get.back();
+                                controller.blockPost();
+                              },
+                              child: const Text('Yes'),
+                            ),
+                          ],
+                        ),
+                      );
+                    },
+                    child: const Text(
+                      'Block',
                     ),
                   )
                 ],
@@ -340,23 +369,36 @@ class PostDetailScreen extends StatelessWidget {
                                             mainAxisSpacing: 30.sp,
                                             crossAxisSpacing: 24.sp,
                                           ),
-                                          itemBuilder: (context, index) =>
-                                              index <
-                                                      controller.similarPostList
-                                                          .length
-                                                  ? PostItem(
-                                                      post: controller
+                                          itemBuilder: (context, index) {
+                                            if (index <
+                                                controller
+                                                    .similarPostList.length) {
+                                              return PostItem(
+                                                post: controller
+                                                    .similarPostList[index],
+                                                onTap: () async {
+                                                  Get.delete<
+                                                      PostDetailController>();
+                                                  await Navigator.push(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                          builder: (context) =>
+                                                              PostDetailScreen(
+                                                                  post: post)));
+
+                                                  controller.onInit();
+                                                },
+                                                onWishlistTap: () {
+                                                  controller.toggleWishlist(
+                                                      controller
                                                               .similarPostList[
-                                                          index],
-                                                      onWishlistTap: () {
-                                                        controller.toggleWishlist(
-                                                            controller
-                                                                    .similarPostList[
-                                                                index]);
-                                                      },
-                                                    )
-                                                  : const LoadingPostItem(),
-                                        ),
+                                                          index]);
+                                                },
+                                              );
+                                            } else {
+                                              return const LoadingPostItem();
+                                            }
+                                          }),
 
                                   const VerticalSpace(height: 16),
                                 ],

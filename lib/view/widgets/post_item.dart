@@ -4,11 +4,11 @@ import 'package:get/get.dart';
 import 'package:product_sharing/config/app_images.dart';
 import 'package:product_sharing/config/app_theme.dart';
 import 'package:product_sharing/controller/post/mypost_detail_controller.dart';
-import 'package:product_sharing/controller/post/post_detail_controller.dart';
 import 'package:product_sharing/core/utils/storage_helper.dart';
 import 'package:product_sharing/model/post/post_model.dart';
 import 'package:product_sharing/view/screens/post/mypost_detail_screen.dart';
-import 'package:product_sharing/view/screens/post/post_detail_screen.dart';
+// import 'package:product_sharing/controller/post/post_detail_controller.dart';
+// import 'package:product_sharing/view/screens/post/post_detail_screen.dart';
 import 'package:product_sharing/view/widgets/horizontal_space.dart';
 import 'package:product_sharing/view/widgets/online_image.dart';
 import 'package:product_sharing/view/widgets/vertical_space.dart';
@@ -18,11 +18,13 @@ class PostItem extends StatelessWidget {
       {super.key,
       required this.post,
       this.showInList = false,
+      required this.onTap,
       this.onWishlistTap,
       this.type = ''});
 
   final PostModel post;
   final bool showInList;
+  final Function() onTap;
   final Function()? onWishlistTap;
   final String type;
 
@@ -39,11 +41,7 @@ class PostItem extends StatelessWidget {
               MaterialPageRoute(
                   builder: (context) => MypostDetailScreen(post: post)));
         } else {
-          Get.delete<PostDetailController>();
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => PostDetailScreen(post: post)));
+          onTap();
         }
       },
       child: SizedBox(

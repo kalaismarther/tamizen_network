@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:product_sharing/config/app_images.dart';
+import 'package:product_sharing/controller/post/post_detail_controller.dart';
 import 'package:product_sharing/controller/search/search_result_controller.dart';
 import 'package:product_sharing/core/utils/device_helper.dart';
+import 'package:product_sharing/view/screens/post/post_detail_screen.dart';
 import 'package:product_sharing/view/widgets/horizontal_space.dart';
 import 'package:product_sharing/view/widgets/loading_post_item.dart';
 import 'package:product_sharing/view/widgets/post_item.dart';
@@ -74,16 +76,27 @@ class SearchResultScreen extends StatelessWidget {
                               mainAxisSpacing: 30.sp,
                               crossAxisSpacing: 24.sp,
                             ),
-                            itemBuilder: (context, index) =>
-                                index < controller.postList.length
-                                    ? PostItem(
-                                        post: controller.postList[index],
-                                        onWishlistTap: () {
-                                          controller.toggleWishlist(
-                                              controller.postList[index]);
-                                        },
-                                      )
-                                    : const LoadingPostItem(),
+                            itemBuilder: (context, index) => index <
+                                    controller.postList.length
+                                ? PostItem(
+                                    post: controller.postList[index],
+                                    onTap: () async {
+                                      Get.delete<PostDetailController>();
+                                      await Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  PostDetailScreen(
+                                                      post: controller
+                                                          .postList[index])));
+                                      controller.onInit();
+                                    },
+                                    onWishlistTap: () {
+                                      controller.toggleWishlist(
+                                          controller.postList[index]);
+                                    },
+                                  )
+                                : const LoadingPostItem(),
                           ),
               ),
             ),

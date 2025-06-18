@@ -49,10 +49,13 @@ class SignupController extends GetxController {
     } else if (!ValidationHelper.nameRegex.hasMatch(name.value)) {
       UiHelper.showToast('Invalid name');
       return false;
-    } else if (mobileNumber.value.isEmpty) {
-      UiHelper.showToast('Please enter mobile number');
-      return false;
-    } else if (!ValidationHelper.numberRegex.hasMatch(mobileNumber.value)) {
+    }
+    // else if (mobileNumber.value.isEmpty) {
+    //   UiHelper.showToast('Please enter mobile number');
+    //   return false;
+    // }
+    else if (mobileNumber.value.isNotEmpty &&
+        !ValidationHelper.numberRegex.hasMatch(mobileNumber.value)) {
       UiHelper.showToast('Invalid mobile number');
       return false;
     } else if (emailAddress.value.isEmpty) {

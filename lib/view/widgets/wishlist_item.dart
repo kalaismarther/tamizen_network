@@ -33,10 +33,15 @@ class WishlistItem extends StatelessWidget {
                   builder: (context) => MypostDetailScreen(post: post)));
         } else {
           Get.delete<PostDetailController>();
-          Navigator.push(
+          await Navigator.push(
               context,
               MaterialPageRoute(
-                  builder: (context) => PostDetailScreen(post: post)));
+                  builder: (context) => PostDetailScreen(
+                        post: post,
+                      )));
+          if (Get.isRegistered<WishlistController>()) {
+            Get.find<WishlistController>().onInit();
+          }
         }
       },
       child: Container(
