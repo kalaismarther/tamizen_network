@@ -10,6 +10,8 @@ import 'package:product_sharing/core/utils/device_helper.dart';
 import 'package:product_sharing/firebase_options.dart';
 import 'package:product_sharing/view/screens/splash/splash_screen.dart';
 
+//ENTRY FILE
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
